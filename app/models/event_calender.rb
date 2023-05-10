@@ -1,0 +1,2 @@
+class EventCalender < ApplicationRecord
+end
