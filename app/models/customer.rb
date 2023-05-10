@@ -11,7 +11,9 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   # 架空のテーブル名を使用しそれぞれのデータを取得
+  # 自分をフォローしている人
   has_many :followers, through: :relationships, source: :follower
+  # 自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
   # 顧客IDが存在するかどうかのメゾット
