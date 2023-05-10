@@ -6,7 +6,7 @@ class CreateEventCalenders < ActiveRecord::Migration[6.1]
       t.datetime :start_time, null: false
       t.datetime :finish_time, null: false
       t.integer :member, null: false
-
+      t.references :customer, null: false, foreign_key: true
       t.timestamps
     end
   end
