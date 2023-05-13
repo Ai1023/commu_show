@@ -16,11 +16,6 @@ class Customer < ApplicationRecord
   # 自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
-  # 顧客IDが存在するかどうかのメゾット
-  def favorited_by?(customer)
-    favorites.exists?(customer_id: customer.id)
-  end
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

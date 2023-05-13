@@ -5,6 +5,7 @@ class Customer::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def edit

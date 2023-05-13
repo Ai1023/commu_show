@@ -1,15 +1,19 @@
 class Customer::CustomersController < ApplicationController
   def show
-    @customer = Customer.find_by(params[:id])
+    @customer = Customer.find(params[:id])
     @games = @customer.games
   end
 
+  def index
+    @customers = Customer.all
+  end
+
   def edit
-    @customer = Customer.find_by(params[:id])
+    @customer = Customer.find(params[:id])
   end
 
   def update
-    @customer = Customer.find_by(params[:id])
+    @customer = Customer.find(params[:id])
     @customer.update(customer_params)
     redirect_to customers_my_page_path
   end
