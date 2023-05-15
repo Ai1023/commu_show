@@ -1,7 +1,17 @@
 class Customer::CustomersController < ApplicationController
+  before_action :authenticate_customer!
+
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @games = @customer.games
+    favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
+    @favorite_list = Game.find(favorites)
+  end
+
+  def info
+    @customer = Customer.find(params[:id])
+    @follower_customers = @customer.follower_customer
+    @following_customers = @customer.following_customer
   end
 
   def index
@@ -9,11 +19,11 @@ class Customer::CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @customer.update(customer_params)
     redirect_to customers_my_page_path
   end
@@ -22,6 +32,15 @@ class Customer::CustomersController < ApplicationController
   end
 
   def out
+  end
+
+  def follows
+    customer = Customer.find(params[:id])
+    @customers = customer.following_customer.page(params[:page]).per(3).reverse_order
+  end
+
+  def followers
+    customer = customer.follower_customer.page(params[:page]).per(3).reverse_order
   end
 
   private

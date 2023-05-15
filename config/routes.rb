@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    # 顧客用
+  # 顧客用
   # URL /customers/sign_in ...
   devise_for :customers, skip: [:passwords], controllers: {
   registrations: 'customer/registrations',
@@ -30,12 +30,14 @@ Rails.application.routes.draw do
     patch '/customers/information' => 'customers#update'
     get '/customers/quit' => 'customers#quit'
     patch '/customers/out' => 'customers#out'
-    resources :customers, only:[:show, :edit, :update]
-    resources :games do
+    get 'customers/info/:id' => 'customers#info', as: 'customers_info'
+    resources :customers, only:[:index] do
+      resource :relationships, only:[:create, :destroy]
       member do
         get :followers, :followings
       end
-      resources :relationships, only:[:create, :destroy]
+    end
+    resources :games do
       resources :post_comments, only:[:create, :destroy]
       resource :favorites, only:[:create, :destroy]
       resource :join_events, only:[:create, :destroy]

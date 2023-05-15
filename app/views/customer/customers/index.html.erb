@@ -1,0 +1,7 @@
+<h2>ユーザー一覧</h2>
+
+<% @customers.each do |customer| %>
+  <%= link_to customers_info_path(customer.id) do %>
+    <p>ニックネーム：<%= customer.nickname %></p>
+  <% end %>
+<% end %>

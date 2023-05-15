@@ -29,9 +29,22 @@
 
 <h3>投稿一覧</h3>
 <% @games.each do |game| %>
+  <%= link_to @customers_my_page_path do %>
   <p>ニックネーム：<%= game.customer.nickname %></p>
+  <% end %>
   <%= link_to game_path(game.id) do %>
   <p>タイトル：<%= game.game_title %></p>
+    <% end %>
   <p><%= link_to "#{game.post_comments.count} コメント", game_path(game.id) %></p>
+<% end %>
+
+<h3>いいね一覧</h3>
+<% if @favorite_list.present? %>
+  <% @favorite_list.each do |game| %>
+    <%= link_to game_path(game.id) do %>
+      <%= game.game_title %>
+    <% end %>
   <% end %>
+<% else %>
+  <p>まだいいねした投稿はありません</p>
 <% end %>

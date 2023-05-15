@@ -1,4 +1,6 @@
 class Customer::GamesController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @game = Game.new
   end
