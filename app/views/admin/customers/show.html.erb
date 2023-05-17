@@ -1,2 +1,38 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<table class="table">
+  <tr>
+    <th>ユーザーID</th>
+    <td><%= @customer.id %></td>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td><%= @customer.last_name %><%= @customer.first_name %></td>
+  </tr>
+  <tr>
+    <th>フリガナ</th>
+    <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+  </tr>
+  <tr>
+    <th>ニックネーム</th>
+    <td><%= @customer.nickname %></td>
+  </tr>
+  <tr>
+    <th>自己紹介</th>
+    <td><%= @customer.introduction %></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @customer.email %></td>
+  </tr>
+</table>
+
+<div>
+  <%= link_to "ユーザー情報編集", edit_admin_customer_path(@customer) %>
+</div>
+
+<h3>投稿一覧</h3>
+<% @games.each do |game| %>
+  <%= link_to admin_game_path(game.id) do %>
+  <p>タイトル：<%= game.game_title %></p>
+    <% end %>
+  <p><%= link_to "#{game.post_comments.count} コメント", game_path(game.id) %></p>
+<% end %>

@@ -21,6 +21,22 @@
     <th>メールアドレス</th>
     <td><%= @customer.email %></td>
   </tr>
+  <tr>
+    <th>フォロー：</th>
+    <td>
+      <%= link_to followings_customer_path(@customer) do %>
+      <%= @followings.count %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>フォロワー：</th>
+    <td>
+      <%= link_to followers_customer_path(@customer) do %>
+      <%= @followers.count %>
+      <% end %>
+    </td>
+  </tr>
 </table>
 
 <% if @customer == current_customer %>
@@ -46,5 +62,5 @@
     <% end %>
   <% end %>
 <% else %>
-  <p>まだいいねした投稿はありません</p>
+  <p>いいねした投稿はありません</p>
 <% end %>

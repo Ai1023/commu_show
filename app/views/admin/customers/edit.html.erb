@@ -1,2 +1,54 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<h3>ユーザー情報編集</h3>
+
+<%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
+
+    <div class="form-group row">
+      <div class="col-md-3">ユーザーID</div>
+      <div class="col-md-3">
+        <%= f.label :"#{@customer.id}" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3">名前</div>
+      <div class="col-md-3">
+        <%= f.text_field :last_name, placeholder: "姓", autofocus: true, autocomplete: "last_name" %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_field :first_name, placeholder: "名", autocomplete: "first_name" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3">フリガナ</div>
+      <div class="col-md-3">
+        <%= f.text_field :last_name_kana, placeholder: "セイ", autocomplete: "last_name_kana" %>
+      </div>
+      <div class="col-md-5">
+        <%= f.text_field :first_name_kana, placeholder: "メイ", autocomplete: "first_name_kana" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3">ニックネーム</div>
+      <div class="col-md-3">
+        <%= f.text_field :nickname, placeholder: "ニックネーム", autocomplete: "nickname" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3 ">自己紹介</div>
+      <div class="col-md-3">
+        <%= f.text_area :introduction, placeholder: "好きなゲームetc...", autocomplete: "introduction" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-3">メールアドレス</div>
+      <div class="col-md-3">
+        <%= f.email_field :email, placeholder: "test@test.com", autocomplete: "email" %>
+      </div>
+    </div>
+
+    <%= f.submit "変更を保存する" %>
+  <% end %>

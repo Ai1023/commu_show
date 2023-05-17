@@ -5,30 +5,33 @@ class Customer < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :event_calenders, dependent: :destroy
   has_many :join_events, dependent: :destroy
-
-  # フォローしている人
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  # フォローされている人
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-
+  
+  # follower_id=自分
+  # followed_id=相手
   # 架空のテーブル名を使用しそれぞれのデータを取得
-  # 自分がフォローされている人
-  has_many :follower_customer, through: :follower, source: :follower
-  # 自分がフォローしている人
-  has_many :following_customer, through: :followed, source: :followed
+
+  # 自分がフォローする、外す
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # フォロー一覧表記
+  has_many :followings, through: :relationships, source: :followed
+  
+  # 自分がフォローされている
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # フォロワー一覧
+  has_many :followers, through: :reverse_relationships, source: :follower
 
   # ユーザーをフォローする
   def follow(customer_id)
-    follower.create(followed_id: customer_id)
+    relationships.create(followed_id: customer_id)
   end
 
   # ユーザーのフォローを外す
   def unfollow(customer_id)
-    follower.find_by(followed_id: customer_id).destroy
+    relationships.find_by(followed_id: customer_id).destroy
   end
 
   def following?(customer)
-    following_customer.include?(customer)
+    followings.include?(customer)
   end
 
   # Include default devise modules. Others available are:

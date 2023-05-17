@@ -17,6 +17,5 @@ class Customer::PostCommentsController < ApplicationController
 
   def post_comment_params
     params.require(:post_comment).permit(:game_comment)
-
   end
 end

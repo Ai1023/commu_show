@@ -6,16 +6,21 @@ class Customer::CustomersController < ApplicationController
     @games = @customer.games
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
     @favorite_list = Game.find(favorites)
+    @followings = @customer.followings
+    @followers = @customer.followers
   end
 
   def info
     @customer = Customer.find(params[:id])
-    @follower_customers = @customer.follower_customer
-    @following_customers = @customer.following_customer
+    @followings = @customer.followings
+    @followers = @customer.followers
   end
 
   def index
     @customers = Customer.all
+    @customer = current_customer
+    @followings = @customer.followings
+    @followers = @customer.followers
   end
 
   def edit
@@ -34,13 +39,15 @@ class Customer::CustomersController < ApplicationController
   def out
   end
 
-  def follows
+    # フォローフォロワー一覧処理
+  def followings
     customer = Customer.find(params[:id])
-    @customers = customer.following_customer.page(params[:page]).per(3).reverse_order
+    @customers = customer.followings
   end
 
   def followers
-    customer = customer.follower_customer.page(params[:page]).per(3).reverse_order
+    customer = Customer.find(params[:id])
+    @customers = customer.followers
   end
 
   private

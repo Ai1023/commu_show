@@ -3,22 +3,7 @@
   <p>タイトル：<%= @game.game_title %></p>
   <p>内容：<%= @game.game_body %></p>
   <p>投稿日：<%= @game.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @game.customer == current_customer %>
     <%= link_to "削除する", game_path(@game), method: :delete %>
-  <% end %>
-  <% if @game.favorited_by?(current_customer) %>
-    <p>
-      <%= link_to game_favorites_path(@game), method: :delete do %>
-        ♥<%= @game.favorites.count %> いいね外す
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to game_favorites_path(@game), method: :post do %>
-        ♡<%= @game.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
 </div>
 
 <div>
@@ -26,9 +11,7 @@
   <% @game.post_comments.each do |post_comment| %>
     <p><%= post_comment.customer.nickname %></p>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.game_comment %>
-    <% if post_comment.customer == current_customer %>
       <%= link_to "削除する", game_post_comment_path(post_comment.game, post_comment), method: :delete %>
-    <% end %>
   <% end %>
 </div>
 

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'homes#top'
+    root to: 'event_calenders#index'
     resources :customers, only:[:index, :show, :edit, :update]
     resources :games, only:[:index, :show, :destroy] do
       resources :post_comments, only:[:create, :destroy]
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :customers, only:[:index] do
       resource :relationships, only:[:create, :destroy]
       member do
-        get :followers, :followings
+        get :followings, :followers
       end
     end
     resources :games do
