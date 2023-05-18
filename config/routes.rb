@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     root to: 'event_calenders#index'
     resources :customers, only:[:index, :show, :edit, :update]
     resources :games, only:[:index, :show, :destroy] do
-      resources :post_comments, only:[:create, :destroy]
+      resources :post_comments, only:[:destroy]
     end
     resources :event_calenders
   end

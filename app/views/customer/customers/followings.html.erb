@@ -1,20 +1,30 @@
 <div class="cover-user-index">
   <div class="container">
     <div class="row justify-content-center">
-      <h1 class="font-weight-normal mt-5 mb-5">フォロー一覧</h1>
+      <h3 class="font-weight-normal mt-3 mb-5"><%= @customer.nickname %>さんのフォロー一覧</h3>
     </div>
     <div class="row justify-content-center">
       <% if @customers.present? %>
-      <% @customers.each do |customer| %>
-      <div class="one-post card w-100">
-        <%= link_to customers_info_path(customer) do %>
-        <p class="caption h4"><%= customer.nickname %></p>
+        <% @customers.each do |customer| %>
+          <div class="col-md-4">
+            <div class="card mb-3">
+              <%= link_to customers_info_path(customer) do %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= customer.nickname %>さん</h5>
+                <% end %>
+                  <p class="card-text"><%= "#{customer.games.count} 投稿" %></p>
+                </div>
+            </div>
+          </div>
         <% end %>
-        <p class="caption"><%= "#{customer.games.count} 投稿" %></p>
-      </div>
-      <% end %>
       <% else %>
-      <p>フォローしたユーザーはいません</p>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">フォローしている同士はいません</h5>
+            </div>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

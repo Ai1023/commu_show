@@ -34,5 +34,5 @@
   <%= link_to admin_game_path(game.id) do %>
   <p>タイトル：<%= game.game_title %></p>
     <% end %>
-  <p><%= link_to "#{game.post_comments.count} コメント", game_path(game.id) %></p>
+  <p><%= link_to "#{game.post_comments.count} コメント", admin_game_path(game.id) %></p>
 <% end %>

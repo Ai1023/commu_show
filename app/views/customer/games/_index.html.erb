@@ -1,0 +1,11 @@
+<h3 class="post-list-title">投稿一覧</h3>
+  <div class="post-list">
+    <% games.each do |game| %>
+      <div class="post-item">
+        <%= link_to game_path(game.id), class: "post-link" do %>
+          <p class="post-title">タイトル：<%= game.game_title %></p>
+        <% end %>
+        <p class="post-comment-count"><%= "#{game.post_comments.count} コメント" %></p>
+      </div>
+    <% end %>
+  </div>

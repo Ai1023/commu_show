@@ -4,6 +4,7 @@ class Customer::CustomersController < ApplicationController
   def show
     @customer = current_customer
     @games = @customer.games
+    @game = Game.new
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
     @favorite_list = Game.find(favorites)
     @followings = @customer.followings
@@ -12,6 +13,7 @@ class Customer::CustomersController < ApplicationController
 
   def info
     @customer = Customer.find(params[:id])
+    @games = @customer.games
     @followings = @customer.followings
     @followers = @customer.followers
   end
@@ -43,11 +45,13 @@ class Customer::CustomersController < ApplicationController
   def followings
     customer = Customer.find(params[:id])
     @customers = customer.followings
+    @customer = Customer.find(params[:id])
   end
 
   def followers
     customer = Customer.find(params[:id])
     @customers = customer.followers
+    @customer = Customer.find(params[:id])
   end
 
   private

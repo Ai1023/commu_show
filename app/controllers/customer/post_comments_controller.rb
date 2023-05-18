@@ -1,4 +1,5 @@
 class Customer::PostCommentsController < ApplicationController
+  before_action :authenticate_customer!
 
   def create
     game = Game.find(params[:game_id])

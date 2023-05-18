@@ -1,8 +1,0 @@
-<h3>新規投稿フォーム</h3>
-<%= form_with model: @game do |f| %>
-  <h5>タイトル</h5>
-  <%= f.text_field :game_title %>
-  <h5>内容</h5>
-  <%= f.text_area :game_body %>
-  <%= f.submit '投稿する' %>
-<% end %>

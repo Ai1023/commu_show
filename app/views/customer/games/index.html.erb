@@ -1,8 +1,0 @@
-<h3>投稿一覧</h3>
-<% @games.each do |game| %>
-  <p>ニックネーム：<%= game.customer.nickname %></p>
-  <%= link_to game_path(game.id) do %>
-  <p>タイトル：<%= game.game_title %></p>
-  <p><%= link_to "#{game.post_comments.count} コメント", game_path(game.id) %></p>
-  <% end %>
-<% end %>
