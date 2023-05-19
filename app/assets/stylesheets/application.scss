@@ -17,7 +17,7 @@
 .top-image {
   padding: 250px;
   margin: 30px 30px;
-  background-image: url(pf_top.jpg);
+  background-image: image-url("pf_top.jpg");
   background-size: 100%;
   text-align:  center;
 }
@@ -31,7 +31,7 @@
 .about-image {
   padding: 250px;
   margin: 30px 30px;
-  background-image: url(pf_about.jpg);
+  background-image: image-url("pf_about.jpg");
   background-size: 100%;
   text-align: right;
 }
