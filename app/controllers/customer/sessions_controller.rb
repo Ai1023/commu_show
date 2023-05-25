@@ -2,9 +2,26 @@
 
 class Customer::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  
+
+  # 新規登録が行われる前に
+  before_action :customer_state, only: [:create]
+
   def after_sign_in_path_for(resource)
     customers_my_page_path
+  end
+
+  protected
+  # 退会しているかどうかを判断する
+  def customer_state
+  # find_byでID以外のカラムを取得...モデル名.find_by(カラム名: 検索する値)
+    @customer = Customer.find_by(email: params[:customer][:email])
+  # 取得なければメゾットの終了
+    return if !@customer
+  # 取得したアカウントのパスワードと入力されたパスワードが一致しているかどうか...ユーザー情報.valid_password?(入力されたパスワード)
+    if @customer.valid_password?(params[:customer][:password]) && !(@customer.is_active == true)
+      flash[:notice] = "退会済みのアカウントです。"
+      redirect_to new_customer_registration_path
+    end
   end
 
   # GET /resource/sign_in

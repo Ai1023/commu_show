@@ -23,6 +23,7 @@ class Customer::CustomersController < ApplicationController
     @customer = current_customer
     @followings = @customer.followings
     @followers = @customer.followers
+    @q = Customer.ransack(params[:q])
   end
 
   def edit
@@ -35,10 +36,14 @@ class Customer::CustomersController < ApplicationController
     redirect_to customers_my_page_path
   end
 
-  def quit
+  def che
   end
 
-  def out
+  def withdraw
+    @customer = current_customer
+    @customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
     # フォローフォロワー一覧処理
@@ -52,6 +57,16 @@ class Customer::CustomersController < ApplicationController
     customer = Customer.find(params[:id])
     @customers = customer.followers
     @customer = Customer.find(params[:id])
+  end
+
+  def customer_search
+    @q = Cstomer.ransack(params[:q])
+    @results = @q.result
+  end
+
+  def search
+    @q = Customer.ransack(params[:q])
+    @results = @q.result
   end
 
   private

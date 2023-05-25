@@ -1,5 +1,5 @@
 <header class="shadow-sm">
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#0d0015;">
     <div class="container">
       <a class="navbar-brand p-3" href="/">COMMU_SHOW</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +15,10 @@
           <%= link_to 'ユーザー一覧', customers_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'イベントカレンダー', event_calenders_path, class: 'nav-link text-dark' %>
+          <%= link_to 'みんなの投稿', index_all_games_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'イベントカレンダー', events_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
@@ -23,10 +26,10 @@
 
         <% elsif admin_signed_in? %>
         <li class="nav-item">
-          <%= link_to '会員一覧', admin_customers_path, class: 'nav-link text-dark' %>
+          <%= link_to 'ユーザー一覧', admin_customers_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'イベントカレンダー', admin_event_calenders_path, class: 'nav-link text-dark' %>
+          <%= link_to 'イベントカレンダー', admin_events_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
@@ -37,7 +40,7 @@
           <li class="nav-item">
           <%= link_to 'About', about_path, class: 'nav-link text-dark' %>
         </li>
-          <%= link_to 'イベントカレンダー', event_calenders_path, class: 'nav-link text-dark' %>
+          <%= link_to 'イベントカレンダー', events_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
           <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>

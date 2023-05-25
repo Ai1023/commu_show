@@ -1,0 +1,15 @@
+<h3 class="post-list-title">気になる投稿検索結果</h3>
+  <div class="post-list">
+    <% @results.each do |game| %>
+      <div class="post-item">
+        <p class="comment-date">投稿日：<%= game.created_at.strftime('%Y/%m/%d') %></p>
+        <%= link_to customers_info_path(game.customer.id) do %>
+          <p class="post-title">ニックネーム：<%= game.customer.nickname %></p>
+        <% end %>
+        <%= link_to game_path(game.id) do %>
+          <p class="post-title">タイトル：<%= game.game_title %></p>
+        <% end %>
+        <p class="post-comment-count"><%= "#{game.post_comments.count} コメント" %></p>
+      </div>
+    <% end %>
+  </div>

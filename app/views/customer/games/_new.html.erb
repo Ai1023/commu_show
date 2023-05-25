@@ -1,5 +1,5 @@
 <div class="container mt-3">
-  <h2 class="mt-3">New Post</h2>
+  <h2 class="mt-3">新規投稿</h2>
   <%= form_with model: game, class: "mt-3" do |f| %>
     <div class="form-group">
       <label for="game_title">タイトル</label>
@@ -9,6 +9,17 @@
       <label for="game_body">内容</label>
       <%= f.text_area :game_body, class: "form-control" %>
     </div>
+    <div class="check_box">
+    <span>タグ</span>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+     <div>
+       <%= tag.label do %>
+         <%= tag.check_box %>
+         <%= tag.text %>
+       <% end %>
+     </div>
+   <% end %>
+ </div>
     <%= f.submit '投稿する', class: "btn btn-primary" %>
   <% end %>
 </div>

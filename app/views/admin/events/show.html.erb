@@ -1,0 +1,14 @@
+<div>
+<p>タイトル:<%= @event.event_title %></p>
+
+<p>内容:<%= @event.event_body %></p>
+
+<p>日時:<%= @event.start_time.strftime("%Y-%m-%d") %></p>
+
+<p>開始時間:<%= @event.start_time.strftime("%H:%M") %></p>
+
+<p>終了時間:<%= @event.finish_time.strftime("%H:%M") %></p>
+
+<%= link_to '編集する', edit_event_path(@event) %>
+<%= link_to '削除する', event_path(@event.id), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+</div>

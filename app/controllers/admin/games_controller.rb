@@ -1,9 +1,6 @@
 class Admin::GamesController < ApplicationController
   before_action :authenticate_admin!
 
-  def index
-  end
-
   def show
     @game = Game.find(params[:id])
   end

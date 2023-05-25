@@ -14,6 +14,19 @@
       <%= f.label :game_body, class: "form-label" %>
       <%= f.text_area :game_body, class: "form-control", rows: 5 %>
     </div>
+
+    <div class="check_box">
+    <span>タグ</span>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+     <div>
+       <%= tag.label do %>
+         <%= tag.check_box %>
+         <%= tag.text %>
+       <% end %>
+     </div>
+   <% end %>
+ </div>
+
     <div>
       <%= f.submit '保存する', class: "btn btn-primary" %>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_10_050411) do
+ActiveRecord::Schema.define(version: 2023_05_24_055037) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,16 +43,15 @@ ActiveRecord::Schema.define(version: 2023_05_10_050411) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
-  create_table "event_calenders", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "event_title", null: false
     t.text "event_body", null: false
     t.datetime "start_time", null: false
     t.datetime "finish_time", null: false
-    t.integer "member", null: false
     t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_event_calenders_on_customer_id"
+    t.index ["customer_id"], name: "index_events_on_customer_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -62,6 +61,15 @@ ActiveRecord::Schema.define(version: 2023_05_10_050411) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_favorites_on_customer_id"
     t.index ["game_id"], name: "index_favorites_on_game_id"
+  end
+
+  create_table "game_tags", force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_tags_on_game_id"
+    t.index ["tag_id"], name: "index_game_tags_on_tag_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -75,11 +83,11 @@ ActiveRecord::Schema.define(version: 2023_05_10_050411) do
 
   create_table "join_events", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "event_calender_id", null: false
+    t.integer "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["customer_id"], name: "index_join_events_on_customer_id"
-    t.index ["event_calender_id"], name: "index_join_events_on_event_calender_id"
+    t.index ["event_id"], name: "index_join_events_on_event_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -99,12 +107,20 @@ ActiveRecord::Schema.define(version: 2023_05_10_050411) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "event_calenders", "customers"
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "events", "customers"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "games"
+  add_foreign_key "game_tags", "games"
+  add_foreign_key "game_tags", "tags"
   add_foreign_key "games", "customers"
   add_foreign_key "join_events", "customers"
-  add_foreign_key "join_events", "event_calenders"
+  add_foreign_key "join_events", "events"
   add_foreign_key "post_comments", "customers"
   add_foreign_key "post_comments", "games"
 end

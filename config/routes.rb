@@ -14,12 +14,12 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'event_calenders#index'
+    root to: 'events#index'
     resources :customers, only:[:index, :show, :edit, :update]
-    resources :games, only:[:index, :show, :destroy] do
+    resources :events, only:[:show, :index, :edit, :create, :update, :destroy]
+    resources :games, only:[:show, :destroy] do
       resources :post_comments, only:[:destroy]
     end
-    resources :event_calenders
   end
 
   scope module: :customer do
@@ -28,21 +28,28 @@ Rails.application.routes.draw do
     get '/customers/my_page' => 'customers#show'
     get '/customers/information/edit' => 'customers#edit'
     patch '/customers/information' => 'customers#update'
-    get '/customers/quit' => 'customers#quit'
-    patch '/customers/out' => 'customers#out'
+    get '/customers/check' => 'customers#check'
+    patch '/customers/withdraw' => 'customers#withdraw'
     get 'customers/info/:id' => 'customers#info', as: 'customers_info'
     resources :customers, only:[:index] do
+      collection do
+        get 'search'
+      end
       resource :relationships, only:[:create, :destroy]
       member do
         get :followings, :followers
       end
     end
     resources :games do
+      collection do
+        get 'index_all'
+        get 'search'
+      end
       resources :post_comments, only:[:create, :destroy]
       resource :favorites, only:[:create, :destroy]
       resource :join_events, only:[:create, :destroy]
     end
-    resources :event_calenders, only:[:index, :show]
+    resources :events, only:[:index, :show]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

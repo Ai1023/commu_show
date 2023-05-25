@@ -1,0 +1,31 @@
+<%= form_tag index_all_games_path, method: :get, class: 'boards__searchForm' do %>
+<%= select_tag :tag_id,options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
+{
+  prompt: 'タグで絞り込み検索',
+  onchange: 'submit(this.form);'
+} %>
+<% end %>
+
+<h3 class="post-list-title">みんなの投稿</h3>
+  <div class="post-list">
+    <% @games.each do |game| %>
+      <div class="post-item">
+        <p class="comment-date">投稿日：<%= game.created_at.strftime('%Y/%m/%d') %></p>
+        <%= link_to customers_info_path(game.customer.id) do %>
+          <p class="post-title">ニックネーム：<%= game.customer.nickname %></p>
+        <% end %>
+        <%= link_to game_path(game.id) do %>
+          <p class="post-title">タイトル：<%= game.game_title %></p>
+        <% end %>
+        <p class="post-comment-count"><%= "#{game.post_comments.count} コメント" %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <h1>気になる投稿検索</h1>
+<%= search_form_for @q, url: search_games_path do |f| %>
+  <%= f.label :game_body_cont, 'キーワード検索' %>
+  <%= f.search_field :game_body_cont %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>

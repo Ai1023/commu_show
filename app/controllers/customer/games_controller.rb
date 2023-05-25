@@ -18,11 +18,17 @@ class Customer::GamesController < ApplicationController
     @games = current_customer.games
   end
 
+  def index_all
+    # @games = Game.all
+    @q = Game.ransack(params[:q])
+    @games = params[:tag_id].present? ? Tag.find(params[:tag_id]).games : Game.all
+  end
+
   def create
     @game = Game.new(game_params)
     @game.customer_id = current_customer.id
     @game.save
-    redirect_to games_path
+    redirect_to customers_my_page_path
   end
 
   def update
@@ -34,14 +40,18 @@ class Customer::GamesController < ApplicationController
   def destroy
     game = Game.find(params[:id])
     game.destroy
-    redirect_to games_path
+    redirect_to customers_my_page_path
+  end
+
+  def search
+    @q = Game.ransack(params[:q])
+    @results = @q.result
   end
 
   private
 
   def game_params
-    params.require(:game).permit(:game_title, :game_body)
-
+    params.require(:game).permit(:game_title, :game_body, tag_ids: [])
   end
 
 end
