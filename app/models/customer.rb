@@ -34,17 +34,28 @@ class Customer < ApplicationRecord
     followings.include?(customer)
   end
 
+  # ransack検索のため
   def self.ransackable_attributes(auth_object = nil)
     ["nickname"]
   end
-   
+
   # ログイン時に退会済みのユーザーが同じアカウントでログイン出来ないよう制約を設ける
   def active_for_authentication?
     super && (is_active == true)
   end
 
-  def is_deleted
-    !is_active
+  # ゲストログイン
+  def self.guest
+    find_or_create_by!(email: 'guest@test.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.password_confirmation = customer.password
+      customer.last_name = "ゲスト"
+      customer.first_name = "ユーザー"
+      customer.last_name_kana = "ゲスト"
+      customer.first_name_kana = "ユーザー"
+      customer.introduction = "ようこそ"
+      customer.nickname = "guest"
+    end
   end
 
   # Include default devise modules. Others available are:

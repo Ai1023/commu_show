@@ -48,10 +48,8 @@ ActiveRecord::Schema.define(version: 2023_05_24_055037) do
     t.text "event_body", null: false
     t.datetime "start_time", null: false
     t.datetime "finish_time", null: false
-    t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_events_on_customer_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -113,7 +111,6 @@ ActiveRecord::Schema.define(version: 2023_05_24_055037) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "events", "customers"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "games"
   add_foreign_key "game_tags", "games"

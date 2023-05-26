@@ -7,6 +7,8 @@
         <th>名前</th>
         <th>ニックネーム</th>
         <th>投稿数</th>
+        <th>ステータス</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +24,16 @@
           </td>
           <td>
             <%= "#{customer.games.count} 投稿" %>
+          </td>
+          <td>
+            <% if customer.is_active == true %>
+              <span class="font-weight-bold">有効</span>
+            <% else %>
+              <span class="text-danger font-weight-bold">退会</span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "削除する", admin_customer_path(customer.id), method: :delete, class: "btn btn-outline-danger", data: { confirm: '本当に削除しますか？' } %>
           </td>
         </tr>
       <% end %>

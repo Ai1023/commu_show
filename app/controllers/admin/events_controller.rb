@@ -15,8 +15,11 @@ class Admin::EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.save
-    redirect_to admin_events_path
+    if @event.save
+      redirect_to admin_events_path
+    else
+      render 'index'
+    end
   end
 
   def update

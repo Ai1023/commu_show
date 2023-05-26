@@ -16,8 +16,8 @@
  */
 
 .top-image {
-  padding: 250px;
   background-image: image-url("pf_top.jpg");
+  padding: 250px;
   background-size: 100%;
   text-align:  center;
 }
@@ -25,12 +25,11 @@
 .top-text {
   display:  inline-block;
   padding: 30px 30px;
-  background-color: rgba(255, 255, 255, 0.7);
+  margin-top: -80px;
 }
 
 .about-image {
   padding: 250px;
-  margin: 30px 30px;
   background-image: image-url("pf_about.jpg");
   background-size: 100%;
   text-align: right;
@@ -42,4 +41,14 @@
   padding: 30px 30px;
   margin-right: -150px;
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+main {
+  font-family: DotGothic16;
+}
+
+body {
+  background-image: image-url("pf_body.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }

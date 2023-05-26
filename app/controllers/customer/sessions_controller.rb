@@ -3,6 +3,14 @@
 class Customer::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
+  # ゲストログイン
+  def guest_sign_in
+    customer = Customer.guest
+    customer.save(validate: false)
+    sign_in customer
+    redirect_to customers_my_page_path
+  end
+
   # 新規登録が行われる前に
   before_action :customer_state, only: [:create]
 
@@ -23,6 +31,8 @@ class Customer::SessionsController < Devise::SessionsController
       redirect_to new_customer_registration_path
     end
   end
+
+
 
   # GET /resource/sign_in
   # def new
