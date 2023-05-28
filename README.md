@@ -19,7 +19,7 @@
 * みんながおすすめのゲームを知りたい時
 
 ## 設計書
-* 
+!(/assets/images/pf_er.jpg)
 
 ## 開発環境
 * OS：Linux(CentOS)
@@ -28,8 +28,21 @@
 * JSライブラリ：jQuery
 * IDE：Cloud9
 
+## 環境構築に必要な手順
+```
+$ git clone git@github.com:Ai1023/commu_show.git
+$ cd commu_show
+$ rails db:migrate
+$ rails db:seed
+$ yarn install
+$ bundle install
+```
+
 ## 使用素材
-* 使用検討中です。
+* 七三ゆきのアトリエ https://nanamiyuki.com/
+
+作成者
+* https://github.com/Ai1023
 
 ## 規約
 * ゲームの画像やイラストを投稿することを禁止します。
