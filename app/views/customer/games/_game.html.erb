@@ -1,0 +1,21 @@
+<div class="col-md-6">
+  <div class="card border-dark bg-light m-1">
+    <h5 class="card-header">
+      <p>タイトル：<%= game.game_title %></p>
+    </h5>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to customers_info_path(game.customer.id) do %>
+          ニックネーム：<%= game.customer.nickname %>
+        <% end %>
+      </h5>
+      <p class="card-text">
+        <p><%= "#{game.post_comments.count} コメント" %></p>
+        <p>
+          投稿日：<%= game.created_at.strftime('%Y/%m/%d') %>
+          <%= link_to "内容を見る", game_path(game.id), class: "btn btn-lg btn-outline-primary ml-5" %>
+        </p>
+      </p>
+    </div>
+  </div>
+</div>

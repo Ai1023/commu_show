@@ -14,12 +14,7 @@ class Customer::GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def index
-    @games = current_customer.games
-  end
-
   def index_all
-    # @games = Game.all
     @q = Game.ransack(params[:q])
     @games = params[:tag_id].present? ? Tag.find(params[:tag_id]).games : Game.all
   end

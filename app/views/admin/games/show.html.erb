@@ -1,32 +1,35 @@
-<div class="container">
-  <h3 class="mt-3 mb-3">投稿詳細</h3>
+<div class="container pl-5 pr-5 pb-5">
+  <div class="mt-3 mb-3 ml-4">
+    <h2>投稿詳細</h2>
+  </div>
 
-  <div class="row">
+  <div class="row ml-4">
     <div class="col-md-8">
-      <div class="card border-dark">
-        <div class="card-header">ニックネーム：<%= @game.customer.nickname %></div>
+      <div class="card bg-light border-dark">
+        <h5 class="card-header">タイトル：<%= @game.game_title %></h5>
         <div class="card-body">
-          <p class="card-title">タイトル：<%= @game.game_title %></p>
-          <p class="card-text">内容：<%= @game.game_body %><br>
-            投稿日：<%= @game.created_at.strftime('%Y/%m/%d') %>
-          </p>
-          <%= link_to "削除する", admin_game_path(@game), method: :delete, class: "btn btn-danger" %>
+          <p class="card-title">ニックネーム：<%= @game.customer.nickname %>></p>
+          <p class="card-text">内容：<%= @game.game_body %></p>
+          <p>投稿日：<%= @game.created_at.strftime('%Y/%m/%d') %></p>
+          <p><%= link_to "削除する", admin_game_path(@game), method: :delete, class: "btn btn-lg btn-outline-danger", data: { confirm: '本当に削除しますか？' } %></p>
         </div>
       </div>
     </div>
   </div>
 
-  <h3 class="mt-3 mb-3">コメント件数：<%= @game.post_comments.count %></h3>
-  <div class="row">
+  <div class="row ml-4">
+    <h2 class="mt-5">コメント件数：<%= @game.post_comments.count %></h2>
+  </div>
+  <div class="row m-3">
     <% @game.post_comments.each do |post_comment| %>
       <div class="col-md-3">
-        <div class="card border-info m-1">
+        <div class="card bg-light border-dark m-1">
           <div class="card-header">ニックネーム：<%= post_comment.customer.nickname %></div>
           <div class="card-body">
             <div class="card-text">
               <p>コメント：<%= post_comment.game_comment %></p>
               <p>投稿日：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-              <%= link_to "削除する", admin_game_post_comment_path(post_comment.game, post_comment), method: :delete, class: "btn btn-danger" %>
+              <%= link_to "削除する", admin_game_post_comment_path(post_comment.game, post_comment), method: :delete, class: "btn btn-lg btn-outline-danger", data: { confirm: '本当に削除しますか？' } %>
             </div>
           </div>
         </div>

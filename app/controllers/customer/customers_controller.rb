@@ -3,7 +3,7 @@ class Customer::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
-    @games = @customer.games
+    @games = @customer.games.page(params[:page])
     @game = Game.new
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
     @favorite_list = Game.find(favorites)

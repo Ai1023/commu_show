@@ -15,11 +15,26 @@
  *= require_self
  */
 
+main {
+  font-family: DotGothic16;
+  background-image: image-url("pf_body.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+footer {
+  font-family: DotGothic16;
+}
+
+header {
+  font-family: DotGothic16;
+}
+
 .top-image {
   background-image: image-url("pf_top.jpg");
-  padding: 250px;
   background-size: 100%;
-  text-align:  center;
+  padding: 250px;
+  text-align: center;
 }
 
 .top-text {
@@ -29,26 +44,14 @@
 }
 
 .about-image {
-  padding: 250px;
   background-image: image-url("pf_about.jpg");
   background-size: 100%;
-  text-align: right;
+  padding: 250px;
+  text-align: center;
 }
 
 .about-text {
-  text-align: center;
   display:  inline-block;
-  padding: 30px 30px;
-  margin-right: -150px;
+  padding: 30px;
   background-color: rgba(255, 255, 255, 0.7);
-}
-
-main {
-  font-family: DotGothic16;
-}
-
-body {
-  background-image: image-url("pf_body.jpg");
-  background-attachment: fixed;
-  background-size: cover;
 }

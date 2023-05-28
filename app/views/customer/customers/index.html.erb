@@ -3,15 +3,15 @@
     <h2>気になる仲間検索</h2>
   </div>
   <div class="row ml-3">
-      <%= search_form_for @q, url: search_customers_path do |f| %>
-        <%= f.label :nickname_cont, 'ニックネーム検索' %>
-        <%= f.search_field :nickname_cont %>
-        <%= f.submit '検索' %>
-      <% end %>
+    <%= search_form_for @q, url: search_customers_path do |f| %>
+      <%= f.label :nickname_cont, 'ニックネーム検索' %>
+      <%= f.search_field :nickname_cont %>
+      <%= f.submit '検索' %>
+    <% end %>
   </div>
 
-  <div class="row ml-3">
-    <h2 class="mt-5 mb-3">ユーザー一覧</h2>
+  <div class="row mt-5 ml-3 mb-3">
+    <h2>ユーザー一覧</h2>
   </div>
 
   <div class="row mb-5 ml-3 mr-3 pl-4 pr-4">

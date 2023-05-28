@@ -1,0 +1,13 @@
+<% if game.customer != current_customer %>
+  <div>
+    <% if game.favorited_by?(current_customer) %>
+      <%= link_to game_favorites_path(game), method: :delete, class: "btn btn-lg btn-outline-danger" do %>
+        ♥ <%= game.favorites.count %> いいね外す
+      <% end %>
+    <% else %>
+      <%= link_to game_favorites_path(game), method: :post, class: "btn btn-lg btn-outline-success" do %>
+        ♡ <%= game.favorites.count %> いいね
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

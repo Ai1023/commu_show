@@ -6,97 +6,108 @@
       </div>
 
       <div class="row mb-1 ml-3 pl-4">
-      <table class="table table-bordered">
-        <tr>
-          <th class="table-dark" style="width: 140px;">名前</th>
-          <td><%= @customer.last_name %><%= @customer.first_name %></td>
-        </tr>
-        <tr>
-          <th class="table-dark">フリガナ</th>
-          <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
-        </tr>
-        <tr>
-          <th class="table-dark">ニックネーム</th>
-          <td><%= @customer.nickname %></td>
-        </tr>
-        <tr>
-          <th class="table-dark">自己紹介</th>
-          <td><%= @customer.introduction %></td>
-        </tr>
-        <tr>
-          <th class="table-dark">メールアドレス</th>
-          <td><%= @customer.email %></td>
-        </tr>
-        <tr>
-          <th class="table-dark">フォロー</th>
-          <td>
-            <%= link_to followings_customer_path(@customer) do %>
-              <%= @followings.count %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <th class="table-dark">フォロワー</th>
-          <td>
-            <%= link_to followers_customer_path(@customer) do %>
-              <%= @followers.count %>
-            <% end %>
-          </td>
-        </tr>
-      </table>
+        <table class="table table-bordered">
+          <tr>
+            <th class="table-dark" style="width: 140px;">名前</th>
+            <td><%= @customer.last_name %><%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <th class="table-dark">フリガナ</th>
+            <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <th class="table-dark">ニックネーム</th>
+            <td><%= @customer.nickname %></td>
+          </tr>
+          <tr>
+            <th class="table-dark">自己紹介</th>
+            <td><%= @customer.introduction %></td>
+          </tr>
+          <tr>
+            <th class="table-dark">メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <th class="table-dark">フォロー</th>
+            <td>
+              <%= link_to followings_customer_path(@customer) do %>
+                <%= @followings.count %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th class="table-dark">フォロワー</th>
+            <td>
+              <%= link_to followers_customer_path(@customer) do %>
+                <%= @followers.count %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
-    <div class="row ml-5">
-      <% if @customer == current_customer %>
-        <% if @customer.email == 'guest@test.com'%>
-          <p>ゲストユーザーはプロフィールの編集はできません。</p>
-        <% else %>
-          <div>
-            <%= link_to "プロフィール編集", customers_information_edit_path(@customer), class: "btn btn-lg btn-outline-primary" %>
-          </div>
+
+      <div class="row ml-5">
+        <% if @customer == current_customer %>
+          <% if @customer.email == 'guest@test.com'%>
+            <p>ゲストユーザーはプロフィールの編集はできません。</p>
+          <% else %>
+            <div>
+              <%= link_to "プロフィール編集", customers_information_edit_path(@customer), class: "btn btn-lg btn-outline-info" %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
     </div>
 
     <div class="col-md-4 ml-5">
       <%= render 'customer/games/new', game: @game %>
     </div>
+  </div>
+
+  <div class="row m-5">
+    <div class="col-md-6">
+      <div class="row mb-3">
+        <h2>投稿一覧</h2>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <% @games.each do |game| %>
+            <div class="card border-dark bg-light m-1">
+              <div class="card-body">
+                <p class="card-title">タイトル：<%= game.game_title %></p>
+                <p class="card-text"><%= "#{game.post_comments.count} コメント" %></p>
+                <%= link_to "内容を見る", game_path(game.id), class: "btn btn-lg btn-outline-primary" %>
+              </div>
+            </div>
+            <% end %>
+            <div class="row justify-content-center">
+              <%= paginate @games %>
+            </div>
+        </div>
+      </div>
     </div>
 
-  <div class="row mt-5 mb-5">
-  <div class="col-md-6">
-    <h3>投稿一覧</h3>
-    <ul class="list-group">
-      <% @games.each do |game| %>
-        <li class="list-group-item">
-          <%= link_to game_path(game.id) do %>
-            <h5 class="mb-1">タイトル：<%= game.game_title %></h5>
+    <div class="col-md-6">
+      <div class="row mb-3">
+        <h2>いいねした投稿</h2>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <% if @favorite_list.present? %>
+            <% @favorite_list.each do |game| %>
+              <div class="card border-dark bg-light m-1">
+                <div class="card-body">
+                  <p class="card-title">ニックネーム：<%= game.customer.nickname %></p>
+                  <p class="card-text">タイトル：<%= game.game_title %></p>
+                  <%= link_to "内容を見る", game_path(game.id), class: "btn btn-lg btn-outline-primary" %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p>いいねした投稿はありません</p>
           <% end %>
-          <p class="mb-0"><%= link_to "#{game.post_comments.count} コメント", game_path(game.id) %></p>
-        </li>
-      <% end %>
-    </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3>いいねした投稿</h3>
-    <% if @favorite_list.present? %>
-      <ul class="list-group">
-        <% @favorite_list.each do |game| %>
-          <li class="list-group-item">
-            <%= link_to customers_info_path(game.customer.id), class: "text-decoration-none" do %>
-              <p class="mb-0">ニックネーム：<%= game.customer.nickname %></p>
-            <% end %>
-            <%= link_to game_path(game.id), class: "text-decoration-none" do %>
-              <h5 class="mb-1"><%= game.game_title %></h5>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>いいねした投稿はありません</p>
-    <% end %>
-  </div>
-</div>
-
-
 </div>

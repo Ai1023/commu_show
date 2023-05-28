@@ -1,0 +1,13 @@
+<div class="pt-5 mt-4 ml-5 mr-5">
+  <% if game.customer != current_customer %>
+  <div>
+    <%= form_with model: [game, post_comment], url: game_post_comments_path(game) do |f| %>
+    <%= f.text_area :game_comment, rows: '5', placeholder: "コメントを記入", class: "form-control" %>
+  </div>
+</div>
+<div class="row ml-5 mt-2">
+  <%= f.submit "送信する", class: "btn btn-lg btn-outline-primary" %>
+</div>
+    <% end %>
+  <% end %>
+

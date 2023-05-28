@@ -1,7 +1,29 @@
-<div class="show">
-<p>タイトル:<%= @event.event_title %></p>
+<div class="container pl-5 pr-5">
+  <div class="row m-3">
+    <h2>イベント詳細</h2>
+  </div>
 
-<p>内容:<%= @event.event_body %></p>
+  <div class="row m-3">
+    <table class="table table-bordered ml-5 mr-5">
+      <tr>
+        <th class="table-dark" style="width: 70px;">タイトル</th>
+        <td style="width: 200px;"><%= @event.event_title %></td>
+      </tr>
 
-<p>日時:<%= @event.start_time.strftime("%m-%d") %></p>
+      <tr>
+        <th class="table-dark">内容</th>
+        <td><%= @event.event_body %></td>
+      </tr>
+
+      <tr>
+        <th class="table-dark">開始時間</th>
+        <td><%= @event.start_time.strftime("%Y-%m-%d-%H:%M") %></td>
+      </tr>
+
+      <tr>
+        <th class="table-dark">終了時間</th>
+        <td><%= @event.finish_time.strftime("%Y-%m-%d-%H:%M") %></td>
+      </tr>
+    </table>
+  </div>
 </div>
