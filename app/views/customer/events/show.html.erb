@@ -1,12 +1,14 @@
-<div class="container pl-5 pr-5">
-  <div class="row m-3">
+<div class="container p-5">
+  <div class="row ml-4 mb-3">
     <h2>イベント詳細</h2>
+    <h2 class="ml-5"><%= @event.join_events.count %>人参加予定</h2>
   </div>
+  <p class="ml-5">※イベント当日までに登録されたメールアドレスへ詳細をお送り致します。</p>
 
-  <div class="row m-3">
-    <table class="table table-bordered ml-5 mr-5">
+  <div class="row ml-5 mr-5">
+    <table class="table table-bordered">
       <tr>
-        <th class="table-dark" style="width: 70px;">タイトル</th>
+        <th class="table-dark" style="width: 100px;">タイトル</th>
         <td style="width: 200px;"><%= @event.event_title %></td>
       </tr>
 
@@ -25,5 +27,17 @@
         <td><%= @event.finish_time.strftime("%Y-%m-%d-%H:%M") %></td>
       </tr>
     </table>
+
+    <div>
+      <% if @event.join_event_by?(current_customer) %>
+        <%= link_to event_join_events_path(@event), method: :delete, class: "btn btn-lg btn-outline-danger" do %>
+          参加をやめる
+        <% end %>
+      <% else %>
+        <%= link_to event_join_events_path(@event), method: :post, class: "btn btn-lg btn-outline-success" do %>
+          参加する
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

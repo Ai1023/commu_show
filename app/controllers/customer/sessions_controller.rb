@@ -27,7 +27,6 @@ class Customer::SessionsController < Devise::SessionsController
     return if !@customer
   # 取得したアカウントのパスワードと入力されたパスワードが一致しているかどうか...ユーザー情報.valid_password?(入力されたパスワード)
     if @customer.valid_password?(params[:customer][:password]) && !(@customer.is_active == true)
-      flash[:notice] = "退会済みのアカウントです。"
       redirect_to new_customer_registration_path
     end
   end

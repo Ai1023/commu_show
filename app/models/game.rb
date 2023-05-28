@@ -6,7 +6,11 @@ class Game < ApplicationRecord
   has_many :game_tags, dependent: :destroy
   has_many :tags, through: :game_tags
 
-  # 顧客IDが存在するかどうかのメゾット
+  #バリデーション
+  validates :game_body, presence: true
+  validates :game_title, presence: true
+
+  # ユーザーIDが存在するかどうかのメゾット
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end

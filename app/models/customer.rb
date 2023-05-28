@@ -3,8 +3,14 @@ class Customer < ApplicationRecord
   has_many :games, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :events, dependent: :destroy
   has_many :join_events, dependent: :destroy
+
+  #バリデーション
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
+  validates :nickname, presence: true
 
   # follower_id=自分
   # followed_id=相手

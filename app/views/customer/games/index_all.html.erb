@@ -1,8 +1,8 @@
-<div class="container pl-5 pr-5 pb-5">
-  <div class="row mt-3 ml-3">
+<div class="container p-5">
+  <div class="row ml-4">
     <h2>気になる投稿検索</h2>
   </div>
-  <div class="row ml-3">
+  <div class="row ml-4">
     <%= search_form_for @q, url: search_games_path do |f| %>
       <%= f.label :game_body_cont, 'キーワード検索' %>
       <%= f.search_field :game_body_cont %>
@@ -10,7 +10,7 @@
     <% end %>
   </div>
 
-  <div class="row mt-5 ml-3">
+  <div class="row mt-5 ml-4">
     <h2>みんなの投稿</h2>
   </div>
 

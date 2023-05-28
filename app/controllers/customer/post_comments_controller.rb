@@ -5,8 +5,11 @@ class Customer::PostCommentsController < ApplicationController
     game = Game.find(params[:game_id])
     game_comment = current_customer.post_comments.new(post_comment_params)
     game_comment.game_id = game.id
-    game_comment.save
-    redirect_to game_path(game)
+    if game_comment.save
+      redirect_to game_path(game)
+    else
+      redirect_to game_path(game)
+    end
   end
 
   def destroy

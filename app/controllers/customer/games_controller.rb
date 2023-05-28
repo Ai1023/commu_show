@@ -22,14 +22,22 @@ class Customer::GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.customer_id = current_customer.id
-    @game.save
-    redirect_to customers_my_page_path
+    if @game.save
+      flash[:notice] = "投稿しました"
+      redirect_to customers_my_page_path
+    else
+      redirect_to customers_my_page_path
+    end
   end
 
   def update
     game = Game.find(params[:id])
-    game.update(game_params)
-    redirect_to game_path(game.id)
+    if game.update(game_params)
+      redirect_to game_path(game.id)
+    else
+      @game = Game.find(params[:id])
+      render 'edit'
+    end
   end
 
   def destroy

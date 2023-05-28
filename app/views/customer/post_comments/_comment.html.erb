@@ -1,23 +1,25 @@
-<div class="row ml-5 mt-3 mb-2">
-  <h2>コメント件数：<%= game.post_comments.count %></h2>
-</div>
-<div class="row ml-5 mr-5">
-<% game.post_comments.each do |post_comment| %>
-  <div class="col-md-4">
-    <div class="card border-dark bg-light m-1">
-      <div class="card-header">ニックネーム：<%= post_comment.customer.nickname %></div>
-      <div class="card-body">
-        <div class="card-text">
-          <p><%= post_comment.game_comment %></p>
-          <p>投稿日：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-          <div>
-            <% if current_customer == post_comment.customer %>
-              <%= link_to "削除する", game_post_comment_path(post_comment.game, post_comment), method: :delete, class: "btn btn-lg btn-outline-danger", data: { confirm: '本当に削除しますか？' } %>
-            <% end %>
+<div class="container">
+  <div class="row ml-4 mt-3 mb-2">
+    <h2>コメント件数：<%= game.post_comments.count %></h2>
+  </div>
+  <div class="row ml-4 mr-4">
+    <% game.post_comments.each do |post_comment| %>
+      <div class="col-md-4">
+        <div class="card border-dark bg-light m-1">
+          <div class="card-header">ニックネーム：<%= post_comment.customer.nickname %></div>
+          <div class="card-body">
+            <div class="card-text">
+              <p><%= post_comment.game_comment %></p>
+              <p>投稿日：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+              <p>
+                <% if current_customer == post_comment.customer %>
+                  <%= link_to "削除する", game_post_comment_path(post_comment.game, post_comment), method: :delete, class: "btn btn-lg btn-outline-danger", data: { confirm: '本当に削除しますか？' } %>
+                <% end %>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
-<% end %>
 </div>

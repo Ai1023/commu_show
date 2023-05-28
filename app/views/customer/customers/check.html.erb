@@ -1,17 +1,19 @@
-<div class="mt-5 mb-5">
-  <h3 class="text-center"><strong>本当に退会しますか？</strong></h3>
-</div>
-<div class="mb-5">
-  <p class="text-center">
-    退会すると、登録したプロフィールや仲間の事、<br>
-    これまでの活動の思い出が閲覧できなくなります。<br>
-  </p>
-</div>
-<div>
-  <p class="text-center">退会する場合は、「退会する」をクリックしてください。</p>
-</div>
+<div class="container p-5">
+  <div class="row justify-content-center mb-5">
+    <h2 class="text-center"><strong>本当に退会しますか？</strong></h2>
+  </div>
+  <div class="mb-5">
+    <p class="text-center">
+      退会すると、登録したプロフィールや仲間の事、<br>
+      これまでの活動の思い出が閲覧できなくなります。<br>
+    </p>
+  </div>
+  <div>
+    <p class="text-center">退会する場合は、「退会する」をクリックしてください。</p>
+  </div>
 
-<div class="text-center mb-5">
-  <%= link_to "退会しない", customers_my_page_path, class: "btn btn-lg btn-outline-primary mr-5 " %>
-  <%= link_to "退会する", customers_withdraw_path(current_customer), class:"btn btn-lg btn-outline-danger ml-5", method: :patch, data: {confirm: "本当に退会しますか?"} %>
+  <div class="text-center">
+    <%= link_to "退会しない", customers_my_page_path, class: "btn btn-lg btn-outline-primary mr-5 " %>
+    <%= link_to "退会する", customers_withdraw_path(current_customer), class:"btn btn-lg btn-outline-danger ml-5", method: :patch, data: {confirm: "本当に退会しますか?"} %>
+  </div>
 </div>

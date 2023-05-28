@@ -1,11 +1,14 @@
-<div class="container pl-5 pr-5 pb-5">
-  <div class="row m-3">
+<div class="container p-5">
+  <div>
+    <%= flash[:notice] %>
+  </div>
+  <div class="row ml-4">
     <h2>イベント作成</h2>
   </div>
 
   <%= form_with model: @event, url: admin_events_path, method: :post do |f| %>
 
-    <div class="ml-4">
+    <div class="ml-5">
       <div class="form-group">
         <label>タイトル</label>
         <div class="col-md-6">
@@ -40,7 +43,7 @@
     </div>
   <% end %>
 
-  <div class="row ml-3 mt-5 mb-3">
+  <div class="row ml-4 mt-5 mb-3">
     <h2>イベントカレンダー</h2>
   </div>
   <div class="row m-3">
