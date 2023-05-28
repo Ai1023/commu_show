@@ -19,7 +19,7 @@
 * みんながおすすめのゲームを知りたい時
 
 ## 設計書
-!(/assets/images/pf_er.jpg)
+[ER図](https://drive.google.com/file/d/1JDGdLmV_dEFR9SysTRGpQQ8yiS0GQSe7/view?usp=sharing)
 
 ## 開発環境
 * OS：Linux(CentOS)
@@ -41,7 +41,7 @@ $ bundle install
 ## 使用素材
 * 七三ゆきのアトリエ https://nanamiyuki.com/
 
-作成者
+## 作成者
 * https://github.com/Ai1023
 
 ## 規約
