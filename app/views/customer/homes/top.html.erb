@@ -1,9 +1,13 @@
 <div class="top-image">
   <div class="top-text">
+    <% if customer_signed_in? %>
+    <h1>ENJOY THE GAME!!</h1>
+    <% else %>
     <h4>ようこそ、</h4>
     <h4>仲間にならないか？</h4>
     <h3>
       <%= link_to "☞仲間になる", new_customer_registration_path, class: "text-success" %>
     </h3>
+    <% end %>
   </div>
 </div>
