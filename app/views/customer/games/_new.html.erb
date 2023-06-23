@@ -1,3 +1,6 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 <div class="row mb-3">
   <h2>新規投稿</h2>
 </div>
@@ -22,8 +25,8 @@
         </div>
       <% end %>
     </div>
-  </div>
-  <div>
-    <%= f.submit '投稿する', class: "btn btn-lg btn-outline-primary" %>
-  </div>
-<% end %>
+    <div>
+      <%= f.submit '投稿する', class: "btn btn-lg btn-outline-primary" %>
+    </div>
+  <% end %>
+</div>

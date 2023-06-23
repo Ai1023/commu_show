@@ -23,10 +23,16 @@ class Customer::GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.customer_id = current_customer.id
     if @game.save
-      flash[:notice] = "投稿しました"
-      redirect_to customers_my_page_path
+      redirect_to customers_my_page_path, notice: "投稿しました"
     else
-      redirect_to customers_my_page_path
+      @customer = current_customer
+      @games = @customer.games.page(params[:page])
+      favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
+      @favorite_list = Game.find(favorites)
+      @followings = @customer.followings
+      @followers = @customer.followers
+      flash[:notice] = "内容を記入してください"
+      render 'customer/customers/show'
     end
   end
 

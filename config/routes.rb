@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   scope module: :customer do
     root to: 'homes#top'
     get '/about' => 'homes#about'
+    get '/games' => 'customers#show'
     get '/customers/my_page' => 'customers#show'
     get '/customers/information/edit' => 'customers#edit'
     patch '/customers/information' => 'customers#update'
@@ -45,7 +46,7 @@ Rails.application.routes.draw do
         get :followings, :followers
       end
     end
-    resources :games do
+    resources :games, only:[:new, :show, :edit, :create, :update, :destroy] do
       collection do
         get 'index_all'
         get 'search'

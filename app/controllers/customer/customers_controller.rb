@@ -7,22 +7,19 @@ class Customer::CustomersController < ApplicationController
     @game = Game.new
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:game_id)
     @favorite_list = Game.find(favorites)
-    @followings = @customer.followings
-    @followers = @customer.followers
+    follow_number_of_people
   end
 
   def info
     @customer = Customer.find(params[:id])
     @games = @customer.games
-    @followings = @customer.followings
-    @followers = @customer.followers
+    follow_number_of_people
   end
 
   def index
     @customers = Customer.all
     @customer = current_customer
-    @followings = @customer.followings
-    @followers = @customer.followers
+    follow_number_of_people
     @q = Customer.ransack(params[:q])
   end
 
@@ -63,19 +60,27 @@ class Customer::CustomersController < ApplicationController
   end
 
   def customer_search
-    @q = Cstomer.ransack(params[:q])
-    @results = @q.result
+    search_function
   end
 
   def search
-    @q = Customer.ransack(params[:q])
-    @results = @q.result
+    search_function
   end
 
   private
 
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :introduction, :email)
-
   end
+
+  def follow_number_of_people
+    @followings = @customer.followings
+    @followers = @customer.followers
+  end
+
+  def search_function
+    @q = Customer.ransack(params[:q])
+    @results = @q.result
+  end
+
 end
