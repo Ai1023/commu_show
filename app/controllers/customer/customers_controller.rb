@@ -39,7 +39,7 @@ class Customer::CustomersController < ApplicationController
     end
   end
 
-  def chek
+  def check
   end
 
   def withdraw

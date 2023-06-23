@@ -42,6 +42,7 @@ class Customer::GamesController < ApplicationController
 
   def destroy
     game = Game.find(params[:id])
+    game.customer_id = current_customer.id
     game.destroy
     redirect_to customers_my_page_path
   end

@@ -13,7 +13,9 @@ class Customer::PostCommentsController < ApplicationController
   end
 
   def destroy
-    PostComment.find(params[:id]).destroy
+    post_comment = PostComment.find(params[:id])
+    post_comment.customer_id = current_customer.id
+    post_comment.destroy
     redirect_to game_path(params[:game_id])
   end
 
